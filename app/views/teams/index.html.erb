@@ -1,0 +1,13 @@
+<div>
+  <p>hi i'm the teams<p>
+  <% @teams.each do |team| %>
+    <p class="card-text">
+      <%= team.name %>
+        <% team.memberships.each do |member| %>
+          <%= member.user.name %>
+          <%= member.user.email %>
+        <% end %>
+    </p>
+  <% end %>
+  <%= link_to "New Team", new_team_path, class: "button-white-text"%> </p>
+<div>

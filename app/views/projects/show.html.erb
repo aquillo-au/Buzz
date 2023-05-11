@@ -1,0 +1,15 @@
+<%= @project.title %>
+<% if @project.team %>
+  <p> Team members are <p>
+  <% @project.team.memberships.each do |member| %>
+    <%= member.user.name %>
+    <%= member.user.email %>
+  <% end %>
+  </p>
+<% else %>
+  <p> There is no team on this project </p>
+  <p> you are leading the following teams that could be assigned to it <p>
+  <% current_user.teams.each do |team| %>
+    <% team.name %>
+  <% end %>
+<% end %>

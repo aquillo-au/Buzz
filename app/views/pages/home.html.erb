@@ -1,0 +1,12 @@
+<div>
+
+  <div class="banner">
+    <div class="banner-content text-center">
+      <h1 id="banner_header">Welcome to Buzz</h1>
+    </div>
+  </div>
+  <% if user_signed_in? %>
+    <%= link_to "My Projects", projects_path, class: "btn btn-primary", id: "banner-button"  %>
+    <%= link_to "My Teams", teams_path, class: "btn btn-primary", id: "banner-button"  %>
+  <%end %>
+</div>
