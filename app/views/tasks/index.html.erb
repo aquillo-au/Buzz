@@ -1,0 +1,15 @@
+<div>
+  <p>hi i'm the tasks</p>
+  <% @tasks.each do |task| %>
+    <%= link_to task_path(task)do %>
+      <%= task.title %>
+    <% end %>
+    <% if task.status == 'completed' %>
+      <p>&#x2705;</p>
+    <% else %>
+      <%= link_to 'Complete', complete_task_path(task), data: { turbo_method: :patch} %>
+    <% end %>
+  <% end %>
+  <br>
+  <%= link_to "New Task", new_project_task_path, class: "btn btn-primary", id: "banner-button"  %>
+<div>

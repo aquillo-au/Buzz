@@ -1,10 +1,12 @@
 class ProjectsController < ApplicationController
   before_action :find_project, only: %i[show assign_team]
+  before_action :find_assigned, only: %i[show]
   def index
     @projects = policy_scope(Project)
   end
 
   def show
+    @available = check_available
     authorize @project
   end
 
@@ -14,7 +16,16 @@ class ProjectsController < ApplicationController
   end
 
   def assign_team
+    team = Team.find(params[:team])
+    appointment = Appointment.new
+    appointment.team = team
+    appointment.project = @project
     authorize @project
+    if appointment.save
+      redirect_to project_path(@project), notice: 'Team was successfully assigned.'
+    else
+      render :show, status: :unprocessable_entity, notice: 'that team is already assigned'
+    end
   end
 
   def create
@@ -37,5 +48,25 @@ class ProjectsController < ApplicationController
 
   def find_project
     @project = Project.find(params[:id])
+  end
+
+  def find_assigned
+    teams = []
+    @project.appointments.each do |appointment|
+      teams << appointment.team
+    end
+    @assigned = teams.flatten
+  end
+
+  def check_available
+    teams = []
+    current_user.teams.each do |team|
+      check = false
+      team.memberships.each do |member|
+        check = true if member.leader? && member.user == current_user
+      end
+      teams << team if check == true && @assigned.exclude?(team)
+    end
+    teams
   end
 end

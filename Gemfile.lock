@@ -289,7 +289,7 @@ DEPENDENCIES
   pg (~> 1.1)
   puma (~> 5.0)
   pundit (~> 2.3)
-  rails (~> 7.0.4, >= 7.0.4.3)
+  rails (~> 7.0.4)
   rspec-rails
   sassc-rails
   selenium-webdriver

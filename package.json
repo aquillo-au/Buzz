@@ -1,5 +1,22 @@
 {
   "dependencies": {
-    "bootstrap": "^5.2.3"
-  }
+    "@hotwired/turbo-rails": "^7.3.0",
+    "bootstrap": "^5.2.3",
+    "@hotwired/stimulus": "^3.1.1",
+    "@popperjs/core": "^2.11.6",
+    "boostrap": "^2.0.0",
+    "webpack": "^5.75.0",
+    "webpack-cli": "^5.0.0"
+  },
+  "scripts": {
+    "build": "webpack --config webpack.config.js"
+  },
+  "name": "Buzz",
+  "version": "1.0.0",
+  "description": "Manage all your projects",
+  "main": "index.js",
+  "repository": "git@github.com:aquillo-au/Buzz.git",
+  "author": "Ben Greig <aquillo@bigpond.net.au>",
+  "license": "MIT",
+  "private": false
 }

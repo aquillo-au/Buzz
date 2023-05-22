@@ -1,15 +1,19 @@
 <%= @project.title %>
-<% if @project.team %>
-  <p> Team members are <p>
-  <% @project.team.memberships.each do |member| %>
-    <%= member.user.name %>
-    <%= member.user.email %>
+<% if @assigned %>
+  <p> the teams currently working on this project <p>
+  <% @assigned.each do |team| %>
+    <p> <%= team.name %> <p>
+    <% team.users.each do |user| %>
+      <%= user.name %>
+      <%= user.email %>
+    <% end %>
   <% end %>
-  </p>
 <% else %>
   <p> There is no team on this project </p>
-  <p> you are leading the following teams that could be assigned to it <p>
-  <% current_user.teams.each do |team| %>
-    <% team.name %>
-  <% end %>
 <% end %>
+<%= link_to "Project Tasks", project_tasks_path(@project), class: "btn btn-primary", id: "banner-button"  %>
+  <p> you are leading the following teams that could be assigned to it <p>
+  <% @available.each do |team| %>
+    <%= team.name %>
+    <%= button_to "assign this team", assign_team_project_path(:team => team), data: { turbo_method: :post} %>
+  <% end %>

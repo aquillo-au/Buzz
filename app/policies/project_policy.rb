@@ -10,6 +10,10 @@ class ProjectPolicy < ApplicationPolicy
     true
   end
 
+  def assign_team?
+    true
+  end
+
   def create?
     true
   end
