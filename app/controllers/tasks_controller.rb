@@ -1,5 +1,5 @@
 class TasksController < ApplicationController
-  before_action :find_task, only: %i[show complete]
+  before_action :find_task, only: %i[show complete uncomplete]
   def index
     @tasks = policy_scope(Task)
     @project = Project.all
@@ -18,6 +18,18 @@ class TasksController < ApplicationController
 
   def complete
     @task.status = 'completed'
+    @project = @task.project
+    authorize @task
+    if @task.save
+      redirect_to project_tasks_path(@project)
+      flash[:notice] = 'Task completed'
+    else
+      render :new, status: :unprocessable_entity
+    end
+  end
+
+  def uncomplete
+    @task.status = 'in_progress'
     @project = @task.project
     authorize @task
     if @task.save

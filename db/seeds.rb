@@ -25,6 +25,14 @@ bertha = User.create!(
   pay_rate: 16.45
 )
 
+fred = User.create!(
+  name: 'Fred',
+  email: 'fred@lewagon.com',
+  password: 'fredtest',
+  phone: '0406 666 666',
+  pay_rate: 16.45
+)
+
 project = Project.create!(
   title: 'Working Test',
   due_date: Date.today + 7,
@@ -37,21 +45,22 @@ team = Team.create!(
   location: 'the kitchen'
 )
 
-frank_membership = Membership.new
-frank_membership.worker = frank
-frank_membership.team = team
-frank_membership.leader = true
-frank_membership.save!
+Membership.create!(
+  user: frank,
+  team: team,
+  leader: true
+)
 
-bertha_membership = Membership.new
-bertha_membership.worker = bertha
-bertha_membership.team = team
-bertha_membership.save!
+Membership.create!(
+  user: bertha,
+  team: team,
+  leader: false
+)
 
-appointment = Appointment.new
-appointment.team = team
-appointment.project = project
-appointment.save!
+Appointment.create!(
+  team: team,
+  project: project
+)
 
 make_toast = Task.create!(
   title: 'Make Toast',
@@ -63,13 +72,13 @@ make_toast = Task.create!(
 
 Job.create!(
   title: 'Slice the Bread',
-  worker: frank,
+  user: frank,
   task: make_toast
 )
 
 Job.create!(
   title: 'Burn the Bread',
-  worker: bertha,
+  user: bertha,
   task: make_toast
 )
 

@@ -13,6 +13,7 @@ Rails.application.routes.draw do
 
   resources :tasks, only: [:show] do
     patch 'complete', on: :member, action: :complete
+    patch 'uncomplete', on: :member, action: :uncomplete
     resources :jobs, only: %i[new create]
   end
 

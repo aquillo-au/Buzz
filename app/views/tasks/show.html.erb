@@ -6,7 +6,7 @@
     <p> <%= job.user.name %> <p>
     <% if job.status %>
       <p>&#x2705;</p>
-    <% elsif current_user == job.user %>
+    <% elsif current_user == job.user || current_user == job.task.project.user %>
       <%= link_to '□', complete_job_path(job), data: { turbo_method: :patch} %>
     <% else %>
       <p>&#9744;</p>
@@ -15,6 +15,7 @@
 <% else %>
   <p> There is no jobs for this task </p>
 <% end %>
+<br>
 <%= link_to "New Job", new_task_job_path(@task), class: "btn btn-primary", id: "banner-button"  %>
 <div class="container">
   <%= link_to "Back to tasks", project_tasks_path(@task.project) %>

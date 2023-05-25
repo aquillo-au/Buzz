@@ -1,5 +1,5 @@
 class Job < ApplicationRecord
   validates :title, presence: true
   belongs_to :task
-  belongs_to :worker
+  belongs_to :user
 end

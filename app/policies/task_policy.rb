@@ -14,6 +14,10 @@ class TaskPolicy < ApplicationPolicy
     true
   end
 
+  def uncomplete?
+    true
+  end
+
   def show?
     true
   end
