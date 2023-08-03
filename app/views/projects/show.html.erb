@@ -3,9 +3,8 @@
   <p> the teams currently working on this project <p>
   <% @assigned.each do |team| %>
     <p> <%= team.name %> <p>
-    <% team.users.each do |user| %>
-      <%= user.name %>
-      <%= user.email %>
+    <% team.workers.each do |worker| %>
+      <%= worker.name %>
     <% end %>
   <% end %>
 <% else %>

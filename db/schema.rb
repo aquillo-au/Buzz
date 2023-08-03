@@ -26,11 +26,11 @@ ActiveRecord::Schema[7.0].define(version: 2023_05_11_234301) do
 
   create_table "assignments", force: :cascade do |t|
     t.bigint "task_id", null: false
-    t.bigint "user_id", null: false
+    t.bigint "worker_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["task_id"], name: "index_assignments_on_task_id"
-    t.index ["user_id"], name: "index_assignments_on_user_id"
+    t.index ["worker_id"], name: "index_assignments_on_worker_id"
   end
 
   create_table "budgets", force: :cascade do |t|
@@ -45,23 +45,23 @@ ActiveRecord::Schema[7.0].define(version: 2023_05_11_234301) do
 
   create_table "jobs", force: :cascade do |t|
     t.bigint "task_id", null: false
-    t.bigint "user_id", null: false
+    t.bigint "worker_id", null: false
     t.boolean "status"
     t.string "title"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["task_id"], name: "index_jobs_on_task_id"
-    t.index ["user_id"], name: "index_jobs_on_user_id"
+    t.index ["worker_id"], name: "index_jobs_on_worker_id"
   end
 
   create_table "memberships", force: :cascade do |t|
     t.boolean "leader", default: false
     t.bigint "team_id", null: false
-    t.bigint "user_id", null: false
+    t.bigint "worker_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["team_id"], name: "index_memberships_on_team_id"
-    t.index ["user_id"], name: "index_memberships_on_user_id"
+    t.index ["worker_id"], name: "index_memberships_on_worker_id"
   end
 
   create_table "participants", force: :cascade do |t|
@@ -79,10 +79,10 @@ ActiveRecord::Schema[7.0].define(version: 2023_05_11_234301) do
     t.date "due_date"
     t.text "description"
     t.integer "status", default: 0
-    t.bigint "user_id", null: false
+    t.bigint "worker_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["user_id"], name: "index_projects_on_user_id"
+    t.index ["worker_id"], name: "index_projects_on_worker_id"
   end
 
   create_table "tasks", force: :cascade do |t|
@@ -110,9 +110,6 @@ ActiveRecord::Schema[7.0].define(version: 2023_05_11_234301) do
     t.string "reset_password_token"
     t.datetime "reset_password_sent_at"
     t.datetime "remember_created_at"
-    t.string "phone"
-    t.float "pay_rate"
-    t.string "name", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["email"], name: "index_users_on_email", unique: true
@@ -121,7 +118,9 @@ ActiveRecord::Schema[7.0].define(version: 2023_05_11_234301) do
 
   create_table "workers", force: :cascade do |t|
     t.bigint "user_id"
-    t.string "type"
+    t.string "phone"
+    t.float "pay_rate"
+    t.string "name", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["user_id"], name: "index_workers_on_user_id"
@@ -130,15 +129,15 @@ ActiveRecord::Schema[7.0].define(version: 2023_05_11_234301) do
   add_foreign_key "appointments", "projects"
   add_foreign_key "appointments", "teams"
   add_foreign_key "assignments", "tasks"
-  add_foreign_key "assignments", "users"
+  add_foreign_key "assignments", "workers"
   add_foreign_key "budgets", "projects"
   add_foreign_key "jobs", "tasks"
-  add_foreign_key "jobs", "users"
+  add_foreign_key "jobs", "workers"
   add_foreign_key "memberships", "teams"
-  add_foreign_key "memberships", "users"
+  add_foreign_key "memberships", "workers"
   add_foreign_key "participants", "projects"
   add_foreign_key "participants", "workers"
-  add_foreign_key "projects", "users"
+  add_foreign_key "projects", "workers"
   add_foreign_key "tasks", "projects"
   add_foreign_key "workers", "users"
 end

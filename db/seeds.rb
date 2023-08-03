@@ -6,38 +6,43 @@ Job.destroy_all
 Task.destroy_all
 Project.destroy_all
 User.destroy_all
+Worker.destroy_all
 
 # create the seed
 
-frank = User.create!(
-  name: 'Frank',
+frank_user = User.create!(
   email: 'frank@lewagon.com',
-  password: 'franktest',
+  password: 'franktest'
+)
+frank = Worker.create!(
+  name: 'Frank',
   phone: '0405 555 555',
+  user: frank_user,
   pay_rate: 10.45
 )
 
-bertha = User.create!(
-  name: 'Bertha',
+bertha_user = User.create!(
   email: 'bertha@lewagon.com',
   password: 'berthatest',
+)
+bertha = Worker.create!(
+  name: 'Bertha',
   phone: '0406 666 666',
+  user: bertha_user,
   pay_rate: 16.45
 )
 
-fred = User.create!(
+fred = Worker.create!(
   name: 'Fred',
-  email: 'fred@lewagon.com',
-  password: 'fredtest',
   phone: '0406 666 666',
-  pay_rate: 16.45
+  pay_rate: 8.45
 )
 
 project = Project.create!(
   title: 'Working Test',
   due_date: Date.today + 7,
   description: 'We need to make breakfast',
-  user: frank
+  worker: frank
 )
 
 team = Team.create!(
@@ -46,13 +51,19 @@ team = Team.create!(
 )
 
 Membership.create!(
-  user: frank,
+  worker: frank,
   team: team,
   leader: true
 )
 
 Membership.create!(
-  user: bertha,
+  worker: bertha,
+  team: team,
+  leader: false
+)
+
+Membership.create!(
+  worker: fred,
   team: team,
   leader: false
 )
@@ -72,13 +83,13 @@ make_toast = Task.create!(
 
 Job.create!(
   title: 'Slice the Bread',
-  user: frank,
+  worker: frank,
   task: make_toast
 )
 
 Job.create!(
   title: 'Burn the Bread',
-  user: bertha,
+  worker: bertha,
   task: make_toast
 )
 

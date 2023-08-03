@@ -4,11 +4,11 @@
     <%= link_to task_path(task)do %>
       <%= task.title %>
     <% end %>
-    <% if task.status == 'completed' && current_user == task.project.user %>
+    <% if task.status == 'completed' && current_user.worker == task.project.worker %>
       <%= link_to '✅', uncomplete_task_path(task), data: { turbo_method: :patch} %>
     <% elsif task.status == 'completed' %>
       <p>☑️</p>
-    <% elsif current_user == task.project.user %>
+    <% elsif current_user.worker == task.project.worker %>
       <%= link_to '□', complete_task_path(task), data: { turbo_method: :patch} %>
     <% else %>
       <p>&#9744;</p>

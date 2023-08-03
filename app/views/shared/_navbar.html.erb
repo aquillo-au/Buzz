@@ -1,29 +1,26 @@
-<%= turbo_frame_tag 'navbar' do %>
-  <div class="navbar navbar-expand-sm navbar-light navbar-lewagon">
-    <div class="container-fluid">
-      <%= link_to "/", class: "navbar-brand", target:"_top" do %>
-         <%= image_tag "bee_logo.jpg", alt: "Logo" %>
-      <% end %>
+<div class="navbar navbar-expand-sm navbar-light navbar-lewagon">
+  <div class="container-fluid">
+    <%= link_to "/", class: "navbar-brand", target:"_top" do %>
+        <%= image_tag "bee_logo.jpg", alt: "Logo" %>
+    <% end %>
 
-      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-        <span class="navbar-toggler-icon"></span>
-      </button>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
 
-      <div>
-        <ul class="navbar-nav me-auto">
-          <% if !user_signed_in? %>
-              <li class="nav-item active">
-                <%= link_to "Sign up", "/users/sign_up", class: "nav-link" %>
-              </li>
-              <li class="nav-item">
-                <%= link_to "Login", new_user_session_path, class: "nav-link" %>
-              <li>
-            <% else %>
-              <%= link_to "Log Out", destroy_user_session_path, class: "nav-link" %>
-          <%end %>
-        </ul>
-      </div>
+    <div>
+      <ul class="navbar-nav me-auto">
+        <% if !user_signed_in? %>
+            <li class="nav-item active">
+              <%= link_to "Sign up", "/users/sign_up", class: "nav-link" %>
+            </li>
+            <li class="nav-item">
+              <%= link_to "Login", new_user_session_path, class: "nav-link" %>
+            <li>
+          <% else %>
+            <%= link_to "Log Out", destroy_user_session_path, class: "nav-link" %>
+        <%end %>
+      </ul>
     </div>
-    <%# </div> %>
   </div>
-<% end %>
+</div>

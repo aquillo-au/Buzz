@@ -31,7 +31,7 @@ class ProjectsController < ApplicationController
   def create
     @project = Project.new(project_params)
     # @project.user_id = current_user.id
-    @project.user = current_user
+    @project.worker = current_user.worker
     authorize @project
     if @project.save
       redirect_to projects_path, notice: 'project was successfully created.'
@@ -60,10 +60,10 @@ class ProjectsController < ApplicationController
 
   def check_available
     teams = []
-    current_user.teams.each do |team|
+    current_user.worker.teams.each do |team|
       check = false
       team.memberships.each do |member|
-        check = true if member.leader? && member.user == current_user
+        check = true if member.leader? && member.worker == current_user.worker
       end
       teams << team if check == true && @assigned.exclude?(team)
     end

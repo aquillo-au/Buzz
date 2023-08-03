@@ -1,4 +1,5 @@
 class TeamsController < ApplicationController
+  before_action :find_task, only: %i[add_member]
   def index
     @teams = policy_scope(Team)
   end
@@ -11,7 +12,7 @@ class TeamsController < ApplicationController
   def create
     @team = Team.new(team_params)
     @membership = Membership.new
-    @membership.user = current_user
+    @membership.worker = current_user.worker
     @membership.team = @team
     @membership.leader = true
     # @project.user_id = current_user.id
@@ -24,7 +25,15 @@ class TeamsController < ApplicationController
     end
   end
 
+  def add_member
+
+  end
+
   private
+
+  def find_task
+    @team = Team.find(params[:id])
+  end
 
   def team_params
     params.require(:team).permit(:name, :location)

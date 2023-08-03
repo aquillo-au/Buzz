@@ -3,10 +3,10 @@
   <p> the jobs for this task are <p>
   <% @task.jobs.each do |job| %>
     <p> <%= job.title %> <p>
-    <p> <%= job.user.name %> <p>
+    <p> <%= job.worker.name %> <p>
     <% if job.status %>
       <p>&#x2705;</p>
-    <% elsif current_user == job.user || current_user == job.task.project.user %>
+    <% elsif current_user.worker == job.worker || current_user.worker == job.task.project.worker %>
       <%= link_to '□', complete_job_path(job), data: { turbo_method: :patch} %>
     <% else %>
       <p>&#9744;</p>

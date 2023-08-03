@@ -5,8 +5,7 @@
       <h3><%= team.name %></h3>
         <% team.memberships.each do |member| %>
           <div>
-            <%= member.user.name %>
-            <%= member.user.email %>
+            <%= member.worker.name %>
           </div>
         <% end %>
     </div>

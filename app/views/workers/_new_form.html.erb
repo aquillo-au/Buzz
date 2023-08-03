@@ -1,9 +1,11 @@
-<%= simple_form_for([@task, @job]) do |f| %>
+<%= simple_form_for(@worker) do |f| %>
   <%= f.error_notification %>
   <%= f.error_notification message: f.object.errors[:base].to_sentence if f.object.errors[:base].present? %>
 
-  <%= f.input :title, placeholder: 'Job Title'%>
-  <%= f.input :worker_id, collection: @people %>
+  <%= f.input :name, placeholder: 'Workers name'%>
+  <%= f.input :phone, placeholder: 'Phone Number'%>
+  <%= f.input :pay_rate, placeholder: 'Rate of Pay'%>
+  <%= %>
 
   <div class="form-actions">
     <%= f.button :submit %>

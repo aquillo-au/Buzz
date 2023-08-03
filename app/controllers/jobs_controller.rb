@@ -39,13 +39,13 @@ class JobsController < ApplicationController
   def find_people
     people = []
     @task.project.teams.each do |team|
-      people << team.users
+      people << team.workers
     end
     people.flatten
   end
 
   def job_params
-    params.require(:job).permit(:title, :user_id)
+    params.require(:job).permit(:title, :worker_id)
   end
 
   def find_job
